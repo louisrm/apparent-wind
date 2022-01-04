@@ -25,14 +25,20 @@ init = () => {
 
 // animate
 let animationId
-animate = () => {
+let t0 = 0
+let fpsLimit = 60
 
+animate = (t1) => {
     // render page
-    // c.beginPath()
     c.clearRect(0, 0, canvas.width, canvas.height);
     animationId = requestAnimationFrame(animate)
-    // c.fillStyle = 'rgb(0, 61, 102)'
-    // c.fillRect(0, 0, canvas.width, canvas.height)
+
+    // if dt faster than 1/60s just draw
+    let dt = t1 - t0;
+    if (fpsLimit && dt < 1000 / fpsLimit) {
+        boat.draw()
+        return;
+    }
 
     boat.update()
     boat.draw()
@@ -40,24 +46,27 @@ animate = () => {
     // steering
     if (keys && keys[37]) {
         if (boat.rudderAngle > -45) {
-            boat.rudderAngle -= 1 ;
+            boat.rudderAngle -= 2;
         }
     }
     if (keys && keys[39]) {
         if (boat.rudderAngle < 45) {
-            boat.rudderAngle += 1;
+            boat.rudderAngle += 2;
         }
     }
     if (keys && keys[65]) {
         if (boat.sailAngle > -80) {
-            boat.sailAngle -= 1 ;
+            boat.sailAngle -= 2;
         }
     }
     if (keys && keys[68]) {
         if (boat.sailAngle < 80) {
-            boat.sailAngle += 1;
+            boat.sailAngle += 2;
         }
     }
+
+    // update previous time step
+    t0 = t1;
 }
 
 // steering
@@ -75,7 +84,7 @@ addEventListener('keyup', (e) => {
 
 // start
 init()
-animate()
+requestAnimationFrame(animate)
 // setInterval(() => {
 
     
