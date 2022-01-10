@@ -34,6 +34,9 @@ class Boat {
         this.x += (this.speed * 0.001 + prevSpeed) * Math.sin(this.heading);
         this.y -= (this.speed * 0.001 + prevSpeed) * Math.cos(this.heading);
 
+        windEl.innerHTML = (windSpeed).toFixed(1)
+        // headingEl.innerHTML = (this.heading).toFixed(1)
+        speedEl.innerHTML = (this.speed).toFixed(1)
     }
 
     draw = () => {

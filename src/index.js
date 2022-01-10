@@ -4,29 +4,38 @@
 // Canvas
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-canvas.width = innerWidth
-canvas.height = innerHeight
+var rect = canvas.parentNode.getBoundingClientRect();
+canvas.width = rect.width;
+canvas.height = rect.height;
 
 const x = canvas.width / 2
 const y = canvas.height * 3/4
 const d2r = Math.PI / 180
 
+// collect elements
+const speedEl = document.querySelector('#speedEl')
+const headingEl = document.querySelector('#headingEl')
+const windEl = document.querySelector('#windEl')
+const fpsEl = document.querySelector('#fpsEl')
+
+
+
 let keys = []
 let boat = new Boat( x, y, 0, 0, 0, 0, 0)
 let windHeading = 0
-let windSpeed = 1
+let windSpeed = 10
 
 // init
 init = () => {
     boat = new Boat( x, y, 0, 0, 0, 0, 0)
     windHeading = 0
-    windSpeed = 1
+    windSpeed = 2
 }
 
 // animate
 let animationId
 let t0 = 0
-let fpsLimit = 60
+let fpsLimit = 120
 
 animate = (t1) => {
     // render page
@@ -39,6 +48,8 @@ animate = (t1) => {
         boat.draw()
         return;
     }
+
+    fpsEl.innerHTML = (1/dt * 1000).toFixed(0)
 
     boat.update()
     boat.draw()
@@ -85,10 +96,3 @@ addEventListener('keyup', (e) => {
 // start
 init()
 requestAnimationFrame(animate)
-// setInterval(() => {
-
-    
-
-//     // animate
-//     animate()
-// }, 20)
