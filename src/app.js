@@ -19,6 +19,22 @@ const windEl = document.querySelector('#windEl')
 const fpsEl = document.querySelector('#fpsEl')
 
 
+const seed = Date.now();
+const imageData = c.createImageData(canvas.width, canvas.height);
+const openSimplex = openSimplexNoise(seed);
+const zoom = 8;
+var simplex_x, simplex_y, index = 0;
+for (simplex_y = 0; simplex_y < canvas.height; simplex_y++) {
+  for (simplex_x = 0; simplex_x < canvas.width; simplex_x++) {
+    const value = (openSimplex.noise2D(simplex_x / zoom, simplex_y / zoom) + 1) * 128;
+    imageData.data[index++] = value;
+    imageData.data[index++] = value;
+    imageData.data[index++] = value;
+    imageData.data[index++] = 255;
+  }
+}
+c.putImageData(imageData, 0, 0)
+
 
 let keys = []
 let boat = new Boat( x, y, 0, 0, 0, 0, 0)
@@ -93,6 +109,6 @@ addEventListener('keyup', (e) => {
 
 
 
-// start
-init()
-requestAnimationFrame(animate)
+// // start
+// init()
+// requestAnimationFrame(animate)

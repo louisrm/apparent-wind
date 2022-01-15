@@ -1,0 +1,3 @@
+[submodule "src/lib/SimplexNoiseJS"]
+	path = src/lib/SimplexNoiseJS
+	url = https://github.com/blindman67/SimplexNoiseJS.git
