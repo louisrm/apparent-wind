@@ -14,7 +14,8 @@ const d2r = Math.PI / 180
 
 // collect elements
 const speedEl = document.querySelector('#speedEl')
-const headingEl = document.querySelector('#headingEl')
+const boatHeadingEl = document.getElementById('boatHeadingEl')
+const windHeadingEl = document.getElementById('windHeadingEl')
 const windEl = document.querySelector('#windEl')
 const fpsEl = document.querySelector('#fpsEl')
 
@@ -45,7 +46,7 @@ animate = (t1) => {
     dt = (t1 - t0) / 1000;
     fpsEl.innerHTML = (1/dt).toFixed(0)
 
-    //waves.update()
+    // waves.update()
     boat.update()
     boat.draw()
 

@@ -38,9 +38,12 @@ class Boat {
         this.x += this.speed * Math.sin(this.heading) * dt;
         this.y -= this.speed * Math.cos(this.heading) * dt;
 
-        windEl.innerHTML = (windSpeed).toFixed(1)
-        // headingEl.innerHTML = (this.heading).toFixed(1)
-        speedEl.innerHTML = (this.speed).toFixed(1)
+        boatHeadingEl.setAttribute("style", `transform:rotate(${this.heading*180/Math.PI}deg)`)
+        speedEl.innerHTML = (this.speed).toFixed(0)
+
+        windHeadingEl.setAttribute("style", `transform:rotate(${windHeading*180/Math.PI}deg)`)
+        windEl.innerHTML = (windSpeed).toFixed(0)
+        
     }
 
     draw = () => {
