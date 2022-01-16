@@ -5,8 +5,8 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 var rect = canvas.parentNode.getBoundingClientRect();
-canvas.width = rect.width;
-canvas.height = rect.height;
+canvas.width = rect.width > 800 ? 800 : rect.width - 50;
+canvas.height = 500;
 
 const x = canvas.width / 2
 const y = canvas.height * 3/4
@@ -19,34 +19,55 @@ const windHeadingEl = document.getElementById('windHeadingEl')
 const windEl = document.querySelector('#windEl')
 const fpsEl = document.querySelector('#fpsEl')
 
+const rudderRange = document.getElementById('rudderRange')
+const rudderVal = document.getElementById('rudderVal')
+const sailRange = document.getElementById('sailRange')  
+const sailVal = document.getElementById('sailVal')  
+
+const windAngleRange = document.getElementById('windAngleRange')
+const windAngleVal = document.getElementById('windAngleVal')
+const windSpeedRange = document.getElementById('windSpeedRange')  
+const windSpeedVal = document.getElementById('windSpeedVal')  
+
+const showWaves = document.getElementById('showWaves')
+
+
+
+// init
 let keys = []
 let boat = new Boat( x, y, 0, 0, 0, 0, 0)
 let windHeading = 0
-let windSpeed = 10
+let windSpeed = 100
 let waves = new Waves;
-
-// init
-init = () => {
-    boat = new Boat( x, y, 0, 0, 0, 0, 0)
-    windHeading = 0
-    windSpeed = 100
-}
+let drawWaves = true;
 
 // animate
 let animationId
 let t0 = 0
-let fpsLimit = 120
 let dt = 0
+
+fpsArr = []
+let t2 = 0
 
 animate = (t1) => {
     // render page
     c.clearRect(0, 0, canvas.width, canvas.height);
     animationId = requestAnimationFrame(animate)
 
+    // calculate fps
     dt = (t1 - t0) / 1000;
-    fpsEl.innerHTML = (1/dt).toFixed(0)
+    if (t2 > 1/10) {
+        const avgFps = fpsArr.reduce((a, b) => a + b) / fpsArr.length;
+        fpsEl.innerHTML = (1/avgFps).toFixed(0)
+        t2 = 0
+        fpsArr = []
+    } else {
+        t2 += dt
+        fpsArr.push(dt)
+    }
 
-    // waves.update()
+    // update canvas
+    waves.update(drawWaves)
     boat.update()
     boat.draw()
 
@@ -87,8 +108,26 @@ addEventListener('keyup', (e) => {
     keys[e.keyCode] = (e.type == "keydown");
 })
 
+showWaves.addEventListener('change', () => {
+    drawWaves = showWaves.checked;
+    console.log(showWaves.checked)
+})
 
+rudderRange.oninput = function() {
+    boat.rudderAngle = this.value;
+}
 
-// start
-init()
+sailRange.oninput = function() {
+    boat.sailAngle = this.value;
+}
+
+windAngleRange.oninput = function() {
+    windHeading = this.value*Math.PI/180
+}
+
+windSpeedRange.oninput = function() {
+    windSpeed = this.value
+}
+
+// startS
 requestAnimationFrame(animate)

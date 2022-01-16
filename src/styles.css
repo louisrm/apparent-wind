@@ -1,36 +1,60 @@
+* {
+    font-family: monospace;
+}
+
 body {
     margin: 0;
-    background: rgb(5, 107, 250);
+    background: rgb(50, 60, 75);
 }
 
 section {
     position: relative;
     height: 100%;
+    width: 100%;
     overflow: hidden;
 }
 
+#game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#game > h2 {
+    font-size: 24;
+    color:rgb(255, 255, 255);
+}
+
+
 canvas {
-    position: absolute;
+    margin-top: 10px;
     z-index: -1;
+    border-radius: 20px;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 1em;
 }
 
 .telem {
-    font-family: monospace;
     background-color: rgb(34, 34, 34);
-    display:inline-flex;
-    position: absolute;
+    display:flex;
     border-radius: 10px;    
     margin-left: 1em;
     margin-top: 1em;
     user-select: none;
     padding: 1em;
     flex-wrap: wrap;
-    bottom: -2em;
+    width: 400px;
+    justify-content: center;
 }
 
 .telem span {
     color: rgb(255, 255, 255);
-    padding-bottom: 2em;
+    margin-bottom: 2px;
 }
 .value {
     margin-right: 2em;
@@ -42,7 +66,6 @@ canvas {
 
 .heading_arrow {
     margin-right: 0.5em;
-    margin-top: -1.7em;
     transform: scale(0.5);
 }
 
@@ -52,4 +75,66 @@ canvas {
 
 .filter-blue{
     filter: invert(77%) sepia(60%) saturate(1525%) hue-rotate(181deg) brightness(109%) contrast(101%);
+}
+
+footer {
+    position: relative;
+    margin-top: 1em;
+    color: rgb(179, 179, 179);
+}
+
+#akey {
+    position: absolute;
+    margin: auto;
+}
+
+.slidecontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em;
+}
+
+.slidecontainer > div {
+    margin-bottom: 1em;
+    color: rgb(255, 255, 255);
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+  
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: #0e85d4;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+#showWaves {
+    margin-right: 0.5em;
+    margin-top: 2px;
 }

@@ -10,10 +10,10 @@ class Boat {
         this.rudderAngle = rudderAngle
     }
 
-    sailPivot = -20 // -20px from center of boat
-    sailLen = 50
-    rudderPivot = 45
-    rudderLen = 25
+    sailPivot = -10 // -20px from center of boat
+    sailLen = 30
+    rudderPivot = 25
+    rudderLen = 15
 
     update = () => {
 
@@ -38,23 +38,48 @@ class Boat {
         this.x += this.speed * Math.sin(this.heading) * dt;
         this.y -= this.speed * Math.cos(this.heading) * dt;
 
+        this.updateTelem()
+
+        
+    }
+
+    updateTelem = () => {
         boatHeadingEl.setAttribute("style", `transform:rotate(${this.heading*180/Math.PI}deg)`)
-        speedEl.innerHTML = (this.speed).toFixed(0)
+        speedEl.innerHTML = (Number(this.speed)).toFixed(0)
 
         windHeadingEl.setAttribute("style", `transform:rotate(${windHeading*180/Math.PI}deg)`)
-        windEl.innerHTML = (windSpeed).toFixed(0)
-        
+        windEl.innerHTML = windSpeed
+
+        windAngleRange.value = windHeading*180/Math.PI
+        windAngleVal.innerHTML = `wind heading: ${windAngleRange.value}&#176`
+
+        windSpeedRange.value = windSpeed
+        windSpeedVal.innerHTML = `wind speed: ${windSpeedRange.value}`
+
+        rudderRange.value = this.rudderAngle;
+        rudderVal.innerHTML = `rudder: ${(rudderRange.value)}&#176`;
+
+        sailRange.value = this.sailAngle;
+        sailVal.innerHTML = `sail: ${(sailRange.value)}&#176`;
     }
 
     draw = () => {
         this.drawBoat()
+        // this.drawWake()
         this.drawRudder()
         this.drawSail()
-        this.drawFlag()
     }
 
-    drawFlag = () => {
-        
+    drawWake = () => {
+        c.save()
+        c.beginPath()
+        c.translate(this.x, this.y)
+        c.rotate(this.heading)
+        c.moveTo(-15, 30)
+        c.fillStyle = 'rgba(82, 154, 255, 0.5)'
+        c.arc()
+        c.fill()
+        c.restore()
     }
 
     drawBoat = () => {
@@ -63,8 +88,8 @@ class Boat {
         c.translate(this.x, this.y)
         c.rotate(this.heading)
         c.fillStyle = 'rgb(228, 216, 192)'
-        c.fillRect(-25, -26, 50, 76)
-        c.arc(0, -25, 25, 0, Math.PI, true)
+        c.fillRect(-15, -16, 30, 46)
+        c.arc(0, -15, 15, 0, Math.PI, true)
         c.fill()
         c.restore()
     }
@@ -74,7 +99,7 @@ class Boat {
         c.beginPath()
         c.translate(this.x, this.y)
         c.rotate(this.heading)
-        c.lineWidth = 7;
+        c.lineWidth = 3;
         c.moveTo(0, this.sailPivot)
         c.lineTo((this.sailLen * Math.sin(this.sailAngle * Math.PI/180)),
             (this.sailLen * Math.cos(this.sailAngle * Math.PI/180)) + this.sailPivot)
@@ -87,7 +112,7 @@ class Boat {
         c.beginPath()
         c.translate(this.x, this.y)
         c.rotate(this.heading)
-        c.lineWidth = 7;
+        c.lineWidth = 3;
         c.moveTo(0, this.rudderPivot)
         c.lineTo((this.rudderLen * Math.sin(this.rudderAngle * Math.PI/180)),
             (this.rudderLen * Math.cos(this.rudderAngle * Math.PI/180)) + this.rudderPivot)

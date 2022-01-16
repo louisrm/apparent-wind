@@ -7,22 +7,50 @@
     <link href="./src/styles.css" rel="stylesheet">
   </head>
 
-  <section>
+ <section>
+    <section id="game">
+      <h2>apparent wind</h2>
+      <canvas></canvas>
+      <div id="telemetryEl" class="telem">
+        <span class="name">boat: </span>
+        <img id="boatHeadingEl" src="img/heading_arrow.svg" alt="" class="filter-pink heading_arrow"></img>
+        <span id="speedEl" class="value">0</span>
+        <span class="name">wind: </span>
+        <img id="windHeadingEl" src="img/heading_arrow.svg" alt="" class="filter-blue heading_arrow"></img>
+        <span id="windEl" class="value">0</span> 
+        <div class="break"></div>
 
-    <div id="telemetryEl" class="telem">
-      <span class="name">boat: </span>
-      <img id="boatHeadingEl" src="src/heading_arrow.svg" alt="" class="filter-pink heading_arrow"></img>
-      <span id="speedEl" class="value">0</span>
-      <span class="name">wind: </span>
-      <img id="windHeadingEl" src="src/heading_arrow.svg" alt="" class="filter-blue heading_arrow"></img>
-      <span id="windEl" class="value">0</span> 
-      <span class="name">fps: </span>
-      <span id="fpsEl" class="value">0</span>
-    </div>
+        <div class="slidecontainer">
+          <div id="rudderVal">rudder: 0&#176</div>
+          <input type="range" min="-45" max="45" value="0" class="slider" id="rudderRange">
+        </div>
+        <div class="slidecontainer">
+          <div id="sailVal">sail: 0&#176</div>
+          <input type="range" min="-80" max="80" value="0" class="slider" id="sailRange">
+        </div>
 
-    <canvas></canvas>
+        <div class="slidecontainer">
+          <div id="windAngleVal">wind heading: 0&#176</div>
+          <input type="range" min="-180" max="180" value="0" class="slider" id="windAngleRange">
+        </div>
+        <div class="slidecontainer">
+          <div id="windSpeedVal">wind speed: 100</div>
+          <input type="range" min="1" max="200" value="100" class="slider" id="windSpeedRange">
+        </div>
 
+        <div class="break"></div>
+        <span class="name">fps: </span>
+        <span id="fpsEl" class="value">0</span>
+        <input type="checkbox" id="showWaves" name="showWaves" checked>
+        <span class="name"> show waves</span>
+
+      </div>
+      <footer>
+        <span>Copyright 2022, Louis Mueller</span>
+      </footer>
+    </section>
   </section>
+
 
   <script src="./src/lib/SimplexNoiseJS/simplexNoise.js"></script>
   <script src="src/Waves.js"></script>
