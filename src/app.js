@@ -28,51 +28,46 @@ let waves = new Waves;
 init = () => {
     boat = new Boat( x, y, 0, 0, 0, 0, 0)
     windHeading = 0
-    windSpeed = 2
+    windSpeed = 100
 }
 
 // animate
 let animationId
 let t0 = 0
 let fpsLimit = 120
+let dt = 0
 
 animate = (t1) => {
     // render page
     c.clearRect(0, 0, canvas.width, canvas.height);
     animationId = requestAnimationFrame(animate)
 
-    // if dt faster than 1/60s just draw
-    let dt = t1 - t0;
-    if (fpsLimit && dt < 1000 / fpsLimit) {
-        boat.draw()
-        return;
-    }
+    dt = (t1 - t0) / 1000;
+    fpsEl.innerHTML = (1/dt).toFixed(0)
 
-    fpsEl.innerHTML = (1/dt * 1000).toFixed(0)
-
-    waves.update()
+    //waves.update()
     boat.update()
     boat.draw()
 
     // steering
     if (keys && keys[37]) {
         if (boat.rudderAngle > -45) {
-            boat.rudderAngle -= 2;
+            boat.rudderAngle -= 50 * dt;
         }
     }
     if (keys && keys[39]) {
         if (boat.rudderAngle < 45) {
-            boat.rudderAngle += 2;
+            boat.rudderAngle += 50 * dt;
         }
     }
     if (keys && keys[65]) {
         if (boat.sailAngle > -80) {
-            boat.sailAngle -= 2;
+            boat.sailAngle -= 50 * dt;
         }
     }
     if (keys && keys[68]) {
         if (boat.sailAngle < 80) {
-            boat.sailAngle += 2;
+            boat.sailAngle += 50 * dt;
         }
     }
 

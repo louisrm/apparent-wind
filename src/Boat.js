@@ -17,22 +17,26 @@ class Boat {
 
     update = () => {
 
-        let prevSpeed = this.speed * 0.999
+        let prevSpeed = this.speed
 
         // calculate speed
         let sailNormalSpeed = windSpeed * Math.sin(this.heading - windHeading * d2r + this.sailAngle * d2r)
-        
-        this.speed = Math.abs(sailNormalSpeed * Math.cos((90-this.sailAngle) * d2r))
+        this.speed = Math.abs(sailNormalSpeed * Math.cos((90-this.sailAngle) * d2r))*dt - 20*dt + prevSpeed
+        if (this.speed < 0) {
+            this.speed = 0
+        } else if (this.speed > windSpeed) {
+            this.speed = windSpeed
+        }
         
         console.log(`speed: ${this.speed} \nnormal: ${sailNormalSpeed} \nmult: ${Math.cos((90-this.sailAngle) * d2r)}
         \nheading: ${this.heading}` )
 
 
         // update position and angle
-        this.heading += (Math.sin(this.rudderAngle * d2r) * (this.speed / windSpeed)) * d2r * 1.5;
+        this.heading += (Math.sin(this.rudderAngle * d2r) * (this.speed / windSpeed)) * d2r * 1.5 ;
         // console.log(this.heading)
-        this.x += (this.speed * 0.001 + prevSpeed) * Math.sin(this.heading);
-        this.y -= (this.speed * 0.001 + prevSpeed) * Math.cos(this.heading);
+        this.x += this.speed * Math.sin(this.heading) * dt;
+        this.y -= this.speed * Math.cos(this.heading) * dt;
 
         windEl.innerHTML = (windSpeed).toFixed(1)
         // headingEl.innerHTML = (this.heading).toFixed(1)
@@ -56,7 +60,9 @@ class Boat {
         c.translate(this.x, this.y)
         c.rotate(this.heading)
         c.fillStyle = 'rgb(228, 216, 192)'
-        c.fillRect(-25, -50, 50, 100)
+        c.fillRect(-25, -26, 50, 76)
+        c.arc(0, -25, 25, 0, Math.PI, true)
+        c.fill()
         c.restore()
     }
 
