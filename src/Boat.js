@@ -33,7 +33,7 @@ class Boat {
 
 
         // update position and angle
-        this.heading += (Math.sin(this.rudderAngle * d2r) * (this.speed / windSpeed)) * d2r * 1.5 ;
+        this.heading += (Math.sin(this.rudderAngle * d2r) * (this.speed / windSpeed)) * d2r * 5 ;
         // console.log(this.heading)
         this.x += this.speed * Math.sin(this.heading) * dt;
         this.y -= this.speed * Math.cos(this.heading) * dt;
