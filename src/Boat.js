@@ -72,12 +72,6 @@ class Boat {
 
         windSpeedRange.value = windSpeed
         windSpeedVal.innerHTML = `wind speed: ${windSpeedRange.value}`
-
-        // rudderRange.value = this.rudderAngle;
-        // rudderVal.innerHTML = `rudder: ${(rudderRange.value)}&#176`
-
-        // sailRange.value = this.sailAngle;
-        // sailVal.innerHTML = `sail: ${(sailRange.value)}&#176`
     }
 
     draw = () => {

@@ -19,11 +19,6 @@ const windHeadingEl = document.getElementById('windHeadingEl')
 const windEl = document.querySelector('#windEl')
 const fpsEl = document.querySelector('#fpsEl')
 
-// const rudderRange = document.getElementById('rudderRange')
-// const rudderVal = document.getElementById('rudderVal')
-// const sailRange = document.getElementById('sailRange')  
-// const sailVal = document.getElementById('sailVal')  
-
 const windAngleRange = document.getElementById('windAngleRange')
 const windAngleVal = document.getElementById('windAngleVal')
 const windSpeedRange = document.getElementById('windSpeedRange')  
@@ -114,14 +109,6 @@ showWaves.addEventListener('change', () => {
 showForces.addEventListener('change', () => {
     drawForces = showForces.checked;
 })
-
-// rudderRange.oninput = function() {
-//     boat.rudderAngle = this.value
-// }
-
-// sailRange.oninput = function() {
-//     boat.sailAngle = this.value
-// }
 
 windAngleRange.oninput = function() {
     windHeading = this.value
