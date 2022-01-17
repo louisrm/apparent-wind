@@ -1,5 +1,3 @@
-
-
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -19,14 +17,14 @@
         <img id="windHeadingEl" src="img/heading_arrow.svg" alt="" class="filter-blue heading_arrow"></img>
         <span id="windEl" class="value">0</span> 
         <div class="break"></div>
-
+        
         <div class="slidecontainer">
           <div id="windAngleVal">wind heading: 0&#176</div>
-          <input type="range" min="-180" max="180" value="0" class="slider" id="windAngleRange">
+          <input type="range" min="-180" max="180" value="0" class="slider" id="windAngleRange"/>
         </div>
         <div class="slidecontainer">
           <div id="windSpeedVal">wind speed: 100</div>
-          <input type="range" min="1" max="200" value="100" class="slider" id="windSpeedRange">
+          <input type="range" min="1" max="200" value="100" class="slider" id="windSpeedRange"/>
         </div>
 
         <div class="break"></div>
@@ -38,8 +36,9 @@
         <span class="name"> show forces</span>
         <div class="break"></div>
 
-        <span><i>use A, D, <-, -> to adjust sail and rudder</i></span>
-
+        <span>
+          <i>use A, D, <-, -> to adjust sail and rudder</i>
+        </span>
 
       </div>
       <footer>
@@ -48,12 +47,10 @@
     </section>
   </section>
 
-
   <script src="./src/lib/SimplexNoiseJS/simplexNoise.js"></script>
   <script src="src/Waves.js"></script>
   <script src="./src/Boat.js"></script>
   <script src="./src/app.js"></script>
-
 
 </html>
 
