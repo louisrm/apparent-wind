@@ -7,6 +7,10 @@ body {
     background: rgb(50, 60, 75);
 }
 
+i {
+    color:rgb(118, 128, 145);
+}
+
 section {
     position: relative;
     height: 100%;
@@ -122,7 +126,7 @@ footer {
     width: 20px;
     height: 20px;
     border-radius: 50%; 
-    background: #0e85d4;
+    background: #65c0fc;
     cursor: pointer;
 }
 
@@ -134,7 +138,7 @@ footer {
     cursor: pointer;
 }
 
-#showWaves {
+#showWaves, #showForces{
     margin-right: 0.5em;
     margin-top: 2px;
 }

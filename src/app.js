@@ -1,11 +1,11 @@
 // Apparent Wind
-// louisrm
+// GitHub: @louisrm
 
 // Canvas
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-var rect = canvas.parentNode.getBoundingClientRect();
-canvas.width = rect.width > 800 ? 800 : rect.width - 50;
+var rect = canvas.parentNode.getBoundingClientRect()
+canvas.width = rect.width > 800 ? 800 : rect.width - 50
 canvas.height = 500;
 
 const x = canvas.width / 2
@@ -19,10 +19,10 @@ const windHeadingEl = document.getElementById('windHeadingEl')
 const windEl = document.querySelector('#windEl')
 const fpsEl = document.querySelector('#fpsEl')
 
-const rudderRange = document.getElementById('rudderRange')
-const rudderVal = document.getElementById('rudderVal')
-const sailRange = document.getElementById('sailRange')  
-const sailVal = document.getElementById('sailVal')  
+// const rudderRange = document.getElementById('rudderRange')
+// const rudderVal = document.getElementById('rudderVal')
+// const sailRange = document.getElementById('sailRange')  
+// const sailVal = document.getElementById('sailVal')  
 
 const windAngleRange = document.getElementById('windAngleRange')
 const windAngleVal = document.getElementById('windAngleVal')
@@ -30,34 +30,33 @@ const windSpeedRange = document.getElementById('windSpeedRange')
 const windSpeedVal = document.getElementById('windSpeedVal')  
 
 const showWaves = document.getElementById('showWaves')
-
-
+const showForces = document.getElementById('showForces')
 
 // init
 let keys = []
 let boat = new Boat( x, y, 0, 0, 0, 0, 0)
 let windHeading = 0
 let windSpeed = 100
-let waves = new Waves;
-let drawWaves = true;
+let waves = new Waves
+let drawWaves = true
+let drawForces = false
 
 // animate
 let animationId
 let t0 = 0
 let dt = 0
-
-fpsArr = []
+let fpsArr = []
 let t2 = 0
 
 animate = (t1) => {
     // render page
-    c.clearRect(0, 0, canvas.width, canvas.height);
+    c.clearRect(0, 0, canvas.width, canvas.height)
     animationId = requestAnimationFrame(animate)
 
     // calculate fps
     dt = (t1 - t0) / 1000;
     if (t2 > 1/10) {
-        const avgFps = fpsArr.reduce((a, b) => a + b) / fpsArr.length;
+        const avgFps = fpsArr.reduce((a, b) => a + b) / fpsArr.length
         fpsEl.innerHTML = (1/avgFps).toFixed(0)
         t2 = 0
         fpsArr = []
@@ -74,22 +73,22 @@ animate = (t1) => {
     // steering
     if (keys && keys[37]) {
         if (boat.rudderAngle > -45) {
-            boat.rudderAngle -= 50 * dt;
+            boat.rudderAngle -= 50 * dt
         }
     }
     if (keys && keys[39]) {
         if (boat.rudderAngle < 45) {
-            boat.rudderAngle += 50 * dt;
+            boat.rudderAngle += 50 * dt
         }
     }
     if (keys && keys[65]) {
         if (boat.sailAngle > -80) {
-            boat.sailAngle -= 50 * dt;
+            boat.sailAngle -= 50 * dt
         }
     }
     if (keys && keys[68]) {
         if (boat.sailAngle < 80) {
-            boat.sailAngle += 50 * dt;
+            boat.sailAngle += 50 * dt
         }
     }
 
@@ -101,33 +100,36 @@ animate = (t1) => {
 addEventListener('keydown', (e) => {
     e.preventDefault();
     keys = (keys || []);
-    keys[e.keyCode] = (e.type == "keydown");
+    keys[e.keyCode] = (e.type == "keydown")
 })
 
 addEventListener('keyup', (e) => {
-    keys[e.keyCode] = (e.type == "keydown");
+    keys[e.keyCode] = (e.type == "keydown")
 })
 
 showWaves.addEventListener('change', () => {
     drawWaves = showWaves.checked;
-    console.log(showWaves.checked)
 })
 
-rudderRange.oninput = function() {
-    boat.rudderAngle = this.value;
-}
+showForces.addEventListener('change', () => {
+    drawForces = showForces.checked;
+})
 
-sailRange.oninput = function() {
-    boat.sailAngle = this.value;
-}
+// rudderRange.oninput = function() {
+//     boat.rudderAngle = this.value
+// }
+
+// sailRange.oninput = function() {
+//     boat.sailAngle = this.value
+// }
 
 windAngleRange.oninput = function() {
-    windHeading = this.value*Math.PI/180
+    windHeading = this.value
 }
 
 windSpeedRange.oninput = function() {
     windSpeed = this.value
 }
 
-// startS
+// start
 requestAnimationFrame(animate)
