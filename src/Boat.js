@@ -100,7 +100,7 @@ class Boat {
         c.restore()
     }
 
-    drawSpeedVec() {
+    drawSpeedVec = () => {
         c.save()
         c.beginPath()
         c.translate(this.x, this.y)
